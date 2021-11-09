@@ -1,0 +1,58 @@
+﻿@model Nhom15.Models.TinTuc
+
+@{
+    ViewBag.Title = "Sua";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("CapNhat", "TinTucs"))
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Mã tin tức</th>
+                <th>Tiêu đề</th>
+                <th>Tóm tắt</th>
+                <th>Nội dung</th>
+                <th>Ảnh</th>
+                <th>Người tạo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-gray-700 dark:text-gray-400">
+                <td class="px-4 py-3">
+                    <div class="flex items-center text-sm">
+                        <div>
+                            @Html.LabelFor(model => Model.MaTinTuc, Model.MaTinTuc, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input type="hidden" name="MaTinTuc" value="@Model.MaTinTuc" />
+                        </div>
+                    </div>
+                </td>
+                <td class="px-4 py-3 text-sm">
+                    <input type="text" name="TenTinTuc" value="@Model.Title" />
+                </td>
+                <td class="px-4 py-3 text-sm">
+                    <input type="text" name="TomTat" value="@Model.TomTat" />
+                </td>
+                <td class="px-4 py-3 text-sm">
+                    <input type="text" name="NoiDung" value="@Model.NoiDung" />
+                    @*<textarea rows="10" style="width:300px; height:80px;grid-row:auto" name="NoiDung" value="@Model.NoiDung"></textarea>*@
+                </td>
+                <td class="px-4 py-3 text-sm">
+                    <input type="text" name="Anh" value="@Model.Anh" />
+                </td>
+                <td class="px-4 py-3 text-sm">
+                    @Html.LabelFor(model => Model.Username, Model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <input type="hidden" name="NguoiTao" value="@Model.Username" />
+                </td>
+                <td class="px-4 py-3 text-xs">
+                    <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                        <input type="submit" value="Cập nhật" />
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+}

@@ -1,0 +1,56 @@
+﻿@model Nhom15.Models.ChuongTrinhKhuyenMai
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ChuongTrinhKhuyenMai</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Tên chương trình
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenChuongTrinh)
+        </dd>
+
+        <dt>
+            Ngày bắt đầu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayBatDau)
+        </dd>
+
+        <dt>
+            Ngày kết thúc
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayKetThuc)
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group" style="margin-top:15px;">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Xóa" class="btn btn-danger" />
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-primary" href="/Admin/ChuongTrinhKhuyenMais/Index" role="button" style="margin-top: 15px;">Quay lại</a>
+        </div>
+    }
+</div>

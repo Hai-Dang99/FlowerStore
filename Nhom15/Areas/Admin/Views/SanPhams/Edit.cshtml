@@ -1,0 +1,88 @@
+﻿@model Nhom15.Models.SanPham
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Sửa thông tin sản phẩm</h2>
+
+@using (Html.BeginForm("Edit", "SanPhams", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MaSP)
+
+        <div class="form-group">
+            
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenSP, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenSP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Đơn giá</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DonGia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DonGia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Loại sản phẩm</label>
+            <div class="col-md-10">
+                @Html.DropDownList("MaDanhMuc", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaDanhMuc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Mô tả</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Ảnh
+            <div class="col-md-10">
+                @{ 
+                    string ImgPath = "";
+                    if (Model.Anh == "")
+                    {
+                        ImgPath = "~/wwwroot/Client/images/noImage.jpg";
+                    }
+                    else
+                    {
+                        ImgPath = "~/wwwroot/Client/images/" + Model.Anh;
+                    }
+                }
+                <img id="output" class="img-thumbnail" alt="Ảnh" width="180" height="200" src="@Url.Content(ImgPath)" />
+                <p><label for="ufile" style="cursor:pointer;">Chọn file ảnh</label></p>
+                <input name="ImageFile" id="ufile" type="file" style="display: none;" onchange="loadFile(event)" />
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-top:15px;">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Sửa" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <a class="btn btn-primary" href="/Admin/DanhMucs/Index" role="button" style="margin-top: 15px;">Quay lại</a>
+</div>
+
+<script>
+    var loadFile = function (event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    }
+</script>

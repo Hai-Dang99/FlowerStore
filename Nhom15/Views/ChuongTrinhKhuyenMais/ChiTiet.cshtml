@@ -1,0 +1,51 @@
+﻿@model Nhom15.Models.ChuongTrinhKhuyenMai
+@using Nhom15.Models
+@{
+    ViewBag.Title = "ChiTiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Nhom15DbContext db = new Nhom15DbContext();
+}
+<div style="width:57%;height:2000px;margin-left:21%;border:0.5px solid lightgrey">
+    <div style="margin:20px auto auto 20px">
+        <h2>Chương trình khuyến mãi " <strong> @Html.DisplayFor(model => Model.TenChuongTrinh) </strong> "</h2>
+        <hr />
+        <p>Đăng bởi : Admin</p>
+        <br />
+        @{
+            string imgPath = "~/wwwroot/Client/images/" + Model.Anh;
+        }
+        <img src="@Url.Content(imgPath)" style="width:98%;height:100%" class="img-fluid" alt="Colorlib Template">
+        <br />
+        <h3><strong>1. Thời gian khuyến mãi</strong></h3>
+        - Chương trình kéo dài đến ngày @Html.DisplayFor(model => Model.NgayKetThuc)
+        - Chương trình có thể kết thúc sớm nếu hết quà tặng
+        <h3><strong>Danh sách sản phẩm khuyến mãi</strong></h3>
+        @foreach (var item in db.SanPhamKhuyenMais)
+        {
+            if (Model.MaChuongTrinh == item.MaChuongTrinh)
+            {
+    <div class="col-md-6 col-lg-3 ftco-animate">
+        <div class="product">
+            <div class="img-prod">
+                @{
+                    string imgP = "~/wwwroot/Client/images/" + item.SanPham.Anh;
+                }
+                <a href="@Url.Action("Details","SanPhams", new { id = item.SanPham.MaSP })"><img class="img-fluid" src="@Url.Content(imgP)" style="width:235px;height:255px" alt="Colorlib Template"></a>
+            </div>
+            <div class="text py-3 pb-4 px-3 text-center">
+                <h3><a href="@Url.Action("Details","SanPhams", new { id = item.SanPham.MaSP })">@Html.DisplayFor(model => item.SanPham.TenSP)</a></h3>
+                <div class="d-flex">
+                    <div class="pricing">
+                        <p class="price"><span class="price-sale">@Html.DisplayFor(model => item.SanPham.DonGia)</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            }
+
+        }
+
+    </div>
+</div>
+

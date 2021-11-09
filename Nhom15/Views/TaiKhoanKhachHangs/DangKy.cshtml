@@ -1,0 +1,76 @@
+﻿@model Nhom15.Models.TaiKhoanKhachHang
+
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+    <script src="~/wwwroot/Login/js/jquery.min.js"></script>
+    <script src="~/wwwroot/Login/js/popper.js"></script>
+    <script src="~/wwwroot/Login/js/bootstrap.min.js"></script>
+    <script src="~/wwwroot/Login/js/main.js"></script>
+}
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5">
+                <div class="wrap">
+                    <div class="img" style="background-image: url(/wwwroot/Login/images/bg-1.jpg);"></div>
+                    <div class="login-wrap p-4 p-md-5">
+                        <div class="d-flex">
+                            <div class="w-100">
+                                <h3 class="mb-4">Đăng ký</h3>
+                            </div>
+                            <div class="w-100">
+                                <p class="social-media d-flex justify-content-end">
+                                    <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                                    <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                                </p>
+                            </div>
+                        </div>
+                        @*<form action="#" class="signin-form">*@
+                        @using (Html.BeginForm("DangKy", "TaiKhoanKhachHangs", FormMethod.Post))
+                        {
+                            <div class="form-group mt-3">
+                                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @data_val = "true", @required = "required" } })
+                                <label class="form-control-placeholder" for="username">Tên đăng nhập</label>
+                            </div>
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @data_val = "true", @required = "required" } })
+                                <label class="form-control-placeholder" for="password">Mật khẩu</label>
+                            </div>
+                            <div class="form-group">
+                                <input name="hoten" type="text" class="form-control" required>
+                                <label class="form-control-placeholder" for="Ho Ten">Họ tên</label>
+
+                            </div>
+                            <div class="form-group">
+                                <input name="email" type="text" class="form-control" required>
+                                <label class="form-control-placeholder" for="Email">Email</label>
+
+                            </div>
+                            <div class="form-group">
+                                <input name="sdt" type="text" class="form-control" required>
+                                <label class="form-control-placeholder" for="SDT">Số điện thoại </label>
+
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">
+                                    Đăng ký
+                                </button>
+                            </div>
+                            <div class="form-group d-md-flex">
+                                <div class="w-50 text-left">
+                                </div>
+                            </div>
+                        }
+                        @*</form>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

@@ -1,0 +1,118 @@
+﻿@model IEnumerable<Nhom15.Models.ChiTietGioHang>
+@using Nhom15.Models;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Nhom15DbContext db = new Nhom15DbContext();
+}
+@section Scripts{
+    <script src="~/wwwroot/Client/js/jquery.min.js"></script>
+    <script src="~/wwwroot/Client/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/wwwroot/Client/js/popper.min.js"></script>
+    <script src="~/wwwroot/Client/js/bootstrap.min.js"></script>
+    <script src="~/wwwroot/Client/js/jquery.easing.1.3.js"></script>
+    <script src="~/wwwroot/Client/js/jquery.waypoints.min.js"></script>
+    <script src="~/wwwroot/Client/js/jquery.stellar.min.js"></script>
+    <script src="~/wwwroot/Client/js/owl.carousel.min.js"></script>
+    <script src="~/wwwroot/Client/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/wwwroot/Client/js/aos.js"></script>
+    <script src="~/wwwroot/Client/js/jquery.animateNumber.min.js"></script>
+    <script src="~/wwwroot/Client/js/bootstrap-datepicker.js"></script>
+    <script src="~/wwwroot/Client/js/scrollax.min.js"></script>
+    @*<script src="~/wwwroot/Client/js/google-map.js"></script>*@
+    <script src="~/wwwroot/Client/js/main.js"></script>
+    <script src="~/Scripts/SanPham/GioHangDetail.js"></script>
+}
+
+@if (Session["User"] != null)
+{
+    if (Model.Where(c => c.Username == Session["User"].ToString()) != null)
+    {
+        if (Model != null)
+        {
+            <table style="width:60%;margin-left:21%" class="table">
+                <thead>
+                    <tr>
+                        <th style="width:120px;text-align:left !important">
+                            Mã sản phẩm
+                        </th>
+                        <th style="width:250px;text-align:left !important">
+                            Tên sản phẩm
+                        </th>
+                        <th style="width:150px;text-align:left !important">
+                            Đơn giá
+                        </th>
+                        <th style="width:150px;text-align:left !important">
+                            Ảnh
+                        </th>
+                        <th style="width:100px;text-align:left !important">
+                            Số lượng
+                        </th>
+                        <th style="width:100px;text-align:left !important">
+                            Thành tiền
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Username.ToString() == Session["User"].ToString())
+                        {
+                            <tr>
+                                <td style="width:120px;text-align:left !important">@Html.DisplayFor(model => item.MaSP)</td>
+                                <td style="width:250px;text-align:left !important">@Html.DisplayFor(model => item.SanPham.TenSP)</td>
+                                <td style="width:150px;text-align:left !important">@Html.DisplayFor(model => item.SanPham.DonGia)</td>
+                                <td style="width:150px;text-align:left !important">
+                                    @{
+                                        string imgPath = "~/wwwroot/Client/images/" + item.SanPham.Anh;
+                                    }
+                                    <img src="@Url.Content(imgPath)" style="width:80px;height:80px" class="img-fluid" alt="Colorlib Template">
+                                </td>
+                                @*<td style="width:150px;text-align:left !important"><input type="number" class="inputNumber" data-bind="@index" min="1" value="@Html.DisplayFor(model => item.SoLuong)" /></td>*@
+                                @using (Html.BeginForm("CapNhat", "ChiTietGioHangs"))
+                                {
+                                    <td style="width:80px;text-align:left !important">
+
+                                        <input type="hidden" value="@item.GioHangID" name="GioHangID" />
+                                        <input style="width:80px" type="number" value="@item.SoLuong" name="SoLuong" />
+
+                                    </td>
+                                    <td style="width:100px;text-align:left !important" class="price-display">
+                                        @{
+                                            var x = (int)item.SoLuong * item.SanPham.DonGia;
+                                        }
+                                        @Html.DisplayFor(model => x)
+                                    </td>
+                                    <td style="width:140px;text-align:left !important">
+                                        <input type="submit" value="Cập nhật" /> | <a style="color:black" href="@Url.Action("Xoa", "ChiTietGioHangs", new { id = item.GioHangID })"><input type="button" value="Xóa" /></a>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            using (Html.BeginForm("ThemMoi", "HoaDons"))
+            {
+                @Html.AntiForgeryToken()
+                <input style="margin:10px auto auto 450px" type="date" name="NgayGiaoHang" value="" />
+                <p style="margin:20px auto auto 900px"><input  type="submit" value="Thanh toán" /></p>
+            }
+            <div style="height:120px;width:100%">
+
+
+
+            </div>
+        }
+        else
+        {
+            <p style="margin:50px auto auto 950px;color:red">Bạn chưa mua sản phẩm nào , đi chợ đi !!! </p>
+            <button style="margin:50px auto auto 950px;background-color:lightblue"><a href="@Url.Action("Index", "Home")">Đi luôn</a></button>
+        }
+    }
+}
+else
+{
+    <p style="margin: 50px auto auto 850px;color:red"> bạn phải đăng nhập để thực hiện việc mua hàng </p>
+}
+

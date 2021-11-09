@@ -1,0 +1,49 @@
+﻿@model Nhom15.Models.TaiKhoanKhachHang
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@if (ViewBag.Flag == 1)
+{
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        Không thể xóa bản ghi này!
+    </div>
+}
+
+<h3>Bạn có chắc muốn xóa tài khoản này?</h3>
+<div>
+    <hr />
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 200px">Tên tài khoản</th>
+                <th style="width: 200px">Mật khẩu</th>
+                <th style="width: 200px">Họ tên</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.Username)</td>
+                <td>@Html.DisplayFor(model => model.Password)</td>
+                <td>@Html.DisplayFor(model => model.HoTen)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group" style="margin-top:15px;">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Xóa" class="btn btn-danger" />
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-primary" href="/Admin/TaiKhoanKhachHangs/Index" role="button" style="margin-top: 15px;">Quay lại</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,88 @@
+﻿@model Nhom15.Models.SanPham
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h3>Bạn có chắc muốn xóa bản ghi này?</h3>
+
+@if (ViewBag.Flag == 1)
+{
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        Không thể xóa bản ghi!
+    </div>
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <p>Tên danh mục</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DanhMuc.TenDanhMuc)
+        </dd>
+
+        <dt>
+            <p>Tên sản phẩm</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSP)
+        </dd>
+
+        <dt>
+            <p>Giá</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonGia)
+        </dd>
+
+        <dt>
+            <p>Mô tả</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+
+        <dt>
+            <p>Ảnh</p>
+        </dt>
+
+        <dd>
+            @{
+                string imgPath = "";
+                if (Model.Anh == "")
+                {
+                    imgPath = "~/wwwroot/ANH/noImage.jpg";
+                }
+                else
+                {
+                    imgPath = "~/wwwroot/ANH/" + Model.Anh;
+                }
+            }
+            <img src="@Url.Content(imgPath)" class="img-thumbnail" width="150" />
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group" style="margin-top:15px;">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Xóa" class="btn btn-danger" />
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-primary" href="/Admin/DanhMucs/Index" role="button" style="margin-top: 15px;">Quay lại</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,67 @@
+﻿@model PagedList.IPagedList<Nhom15.Models.DanhMuc>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+    Danh mục sản phẩm
+</h4>
+
+<div class="col-md-1" style="margin-bottom: 15px;">
+    <a class="btn btn-success" href="/Admin/DanhMucs/Create" role="button"><i class="fas fa-plus-square"></i> Thêm</a>
+</div>
+
+<div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
+    <div class="w-full overflow-x-auto">
+        <table class="w-full whitespace-no-wrap">
+            <thead>
+                <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                    <th class="px-4 py-3">Mã danh mục</th>
+                    <th class="px-4 py-3">
+                        @Html.ActionLink("Tên danh mục","Index",new { sortOrder = ViewBag.SaptheoTen })
+                    </th>
+                    <th class="px-4 py-3">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                @foreach (var item in Model)
+                {
+                    <tr class="text-gray-700 dark:text-gray-400">
+                        <td class="px-4 py-3">
+                            <div class="flex items-center text-sm">
+                                <div>
+                                    <p class="font-semibold">@Html.DisplayFor(model => item.MaDanhMuc)</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                            @Html.DisplayFor(model => item.TenDanhMuc)
+                        </td>
+                        <td class="px-4 py-3 text-xs">
+                            <div class="col-md-1" style="margin-bottom: 15px;">
+                                <a class="btn btn-primary" href="/Admin/DanhMucs/Edit/@item.MaDanhMuc.Trim()" role="button"><i class="fas fa-pen-square"></i> Sửa</a>
+                                <a class="btn btn-danger" href="/Admin/DanhMucs/Delete/@item.MaDanhMuc.Trim()" role="button"><i class="fas fa-trash-alt"></i> Xóa</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div style="margin-top: 15px;">
+        @Html.PagedListPager(
+        Model, page => Url.Action("Index", new { page }),
+        new PagedListRenderOptions()
+        {
+        LiElementClasses = new List<string> { "btn", "btn-warning" }
+        })
+    </div>
+
+
+
+
+

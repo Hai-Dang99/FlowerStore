@@ -1,0 +1,43 @@
+﻿@model Nhom15.Models.DanhMuc
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@if (ViewBag.Flag == 1)
+{
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        Không thể xóa bản ghi này!
+    </div>
+}
+
+<h3>Bạn có chắc muốn xóa danh mục này?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên danh mục
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenDanhMuc)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group" style="margin-top:15px;">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Xóa" class="btn btn-danger" />
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-primary" href="/Admin/DanhMucs/Index" role="button" style="margin-top: 15px;">Quay lại</a>
+        </div>
+    }
+</div>

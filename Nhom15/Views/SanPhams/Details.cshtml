@@ -1,0 +1,155 @@
+﻿@using Nhom15.Models
+@model Nhom15.Models.SanPham
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Nhom15DbContext db = new Nhom15DbContext();
+}
+@section Scripts{
+    <script src="~/wwwroot/Client/js/jquery.min.js"></script>
+    <script src="~/wwwroot/Client/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/wwwroot/Client/js/popper.min.js"></script>
+    <script src="~/wwwroot/Client/js/bootstrap.min.js"></script>
+    <script src="~/wwwroot/Client/js/jquery.easing.1.3.js"></script>
+    <script src="~/wwwroot/Client/js/jquery.waypoints.min.js"></script>
+    <script src="~/wwwroot/Client/js/jquery.stellar.min.js"></script>
+    <script src="~/wwwroot/Client/js/owl.carousel.min.js"></script>
+    <script src="~/wwwroot/Client/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/wwwroot/Client/js/aos.js"></script>
+    <script src="~/wwwroot/Client/js/jquery.animateNumber.min.js"></script>
+    <script src="~/wwwroot/Client/js/bootstrap-datepicker.js"></script>
+    <script src="~/wwwroot/Client/js/scrollax.min.js"></script>
+    @*<script src="~/wwwroot/Client/js/google-map.js"></script>*@
+    <script src="~/wwwroot/Client/js/main.js"></script>
+    <script src="~/Scripts/SanPham/SanPham.js"></script>
+}
+@if (@Session["User"] != null)
+{
+    if (Model.SoLuong <= 0)
+    {
+        <section class="ftco-section">
+            <div class="container">
+                <div class="row">
+                    <p>Sản phẩm này đã hết hàng, quý khách quá đen</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-5 ftco-animate">
+                        @{
+                            string imgPath = "~/wwwroot/Client/images/" + Model.Anh;
+                        }
+                        <img src="@Url.Content(imgPath)" style="width:253px;height:255px" class="img-fluid" alt="Colorlib Template">
+                    </div>
+                    <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+                        <h3 id="txtProductName">@Html.DisplayFor(model => Model.TenSP)</h3>
+                        <div class="rating d-flex">
+                        </div>
+                        <p class="price"><span>@Html.DisplayFor(model => Model.DonGia)</span></p>
+                        <p>
+                            @Html.DisplayFor(Model => Model.MoTa)
+                        </p>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="w-100"></div>
+                        </div>
+                        <p><a href="#" id="btnAddToCartError" class="btn btn-black py-3 px-5">Thêm vào giỏ hàng</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5 ftco-animate">
+                    @{
+                        string imgPath = "~/wwwroot/Client/images/" + Model.Anh;
+                    }
+                    <img src="@Url.Content(imgPath)" style="width:253px;height:255px" class="img-fluid" alt="Colorlib Template">
+                </div>
+                <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+                    <h3 id="txtProductName">@Html.DisplayFor(model => Model.TenSP)</h3>
+                    <div class="rating d-flex">
+                    </div>
+                    <p class="price"><span>@Html.DisplayFor(model => Model.DonGia)</span></p>
+                    <p>
+                        @Html.DisplayFor(Model => Model.MoTa)
+                    </p>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="w-100"></div>
+                    </div>
+                    <p><a href="@Url.Action("Add","ChiTietGioHangs", new { id = Model.MaSP })" id="btnAddToCart" class="btn btn-black py-3 px-5">Thêm vào giỏ hàng</a></p>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    if (Model.SoLuong <= 0)
+    {
+        <section class="ftco-section">
+            <div class="container">
+                <div class="row">
+                    <p>Sản phẩm này đã hết hàng, quý khách quá đen</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-5 ftco-animate">
+                        @{
+                            string imgPath = "~/wwwroot/Client/images/" + Model.Anh;
+                        }
+                        <img src="@Url.Content(imgPath)" style="width:253px;height:255px" class="img-fluid" alt="Colorlib Template">
+                    </div>
+                    <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+                        <h3 id="txtProductName">@Html.DisplayFor(model => Model.TenSP)</h3>
+                        <div class="rating d-flex">
+                        </div>
+                        <p class="price"><span>@Html.DisplayFor(model => Model.DonGia)</span></p>
+                        <p>
+                            @Html.DisplayFor(Model => Model.MoTa)
+                        </p>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="w-100"></div>
+                        </div>
+                        <p><a href="#" id="btnAddToCartError1" class="btn btn-black py-3 px-5">Thêm vào giỏ hàng</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+                            }
+                            else
+                            {
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5 ftco-animate">
+                    @{
+                        string imgPath = "~/wwwroot/Client/images/" + Model.Anh;
+                    }
+                    <img src="@Url.Content(imgPath)" style="width:253px;height:255px" class="img-fluid" alt="Colorlib Template">
+                </div>
+                <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+                    <h3 id="txtProductName">@Html.DisplayFor(model => Model.TenSP)</h3>
+                    <div class="rating d-flex">
+                    </div>
+                    <p class="price"><span>@Html.DisplayFor(model => Model.DonGia)</span></p>
+                    <p>
+                        @Html.DisplayFor(Model => Model.MoTa)
+                    </p>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="w-100"></div>
+                    </div>
+                    <p><a href="#" id="btnAddToCartError1" class="btn btn-black py-3 px-5">Thêm vào giỏ hàng</a></p>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+

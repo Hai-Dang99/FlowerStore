@@ -1,0 +1,85 @@
+﻿@model Nhom15.Models.TaiKhoanKhachHang
+
+@{
+    ViewBag.Title = "ChiTiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <script src="~/wwwroot/Login/js/jquery.min.js"></script>
+    <script src="~/wwwroot/Login/js/popper.js"></script>
+    <script src="~/wwwroot/Login/js/bootstrap.min.js"></script>
+    <script src="~/wwwroot/Login/js/main.js"></script>
+}
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5">
+                <div class="wrap">
+                    <div class="img" style="background-image: url(/wwwroot/Login/images/bg-1.jpg);"></div>
+                    <div class="login-wrap p-4 p-md-5">
+                        <div class="d-flex">
+                            <div class="w-100">
+                                <h3 class="mb-4">Thông tin</h3>
+                            </div>
+                            <div class="w-100">
+                                <p class="social-media d-flex justify-content-end">
+                                    <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                                    <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                                </p>
+                            </div>
+                        </div>
+                        @*<form action="#" class="signin-form">*@
+                        @using (Html.BeginForm("ChiTiet", "TaiKhoanKhachHangs"))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-group mt-3">
+                                <input name="username" type="text" value="@Model.Username" class="form-control" required>
+                                <label class="form-control-placeholder" for="psername">Tên đăng nhập</label>
+                            </div>
+                            <div class="form-group">
+
+                                <input name="password" type="text" value="@Model.Password" class="form-control" required>
+                                <label class="form-control-placeholder" for="password">Mật khẩu</label>
+                            </div>
+                            <div class="form-group">
+
+                                <input name="HoTen" type="text" value="@Model.HoTen" class="form-control" required>
+                                <label class="form-control-placeholder" for="HoTen">Họ tên</label>
+
+                            </div>
+                            <div class="form-group">
+
+
+                                <input name="Email" type="text" value="@Model.Email" class="form-control" required>
+                                <label class="form-control-placeholder" for="Email">Email</label>
+
+                            </div>
+                            <div class="form-group">
+
+                                <input name="SDT" type="text" value="@Model.SDT" class="form-control" required>
+                                <label class="form-control-placeholder" for="SDT">Số điện thoại </label>
+
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">
+                                    Cập nhập
+                                </button>
+                            </div>
+
+                        }
+                        @*</form>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@if (ViewBag.Ok != null)
+{
+    <script>
+                    alert("Cập nhập thành công");
+    </script>
+}
+
+
